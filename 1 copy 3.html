@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>getElementById</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #1a1a2e;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        .calculator {
+            background: linear-gradient(145deg, #16213e, #0f3460);
+            border-radius: 30px;
+            padding: 30px 25px 25px;
+            box-shadow: 
+                0 25px 50px rgba(0,0,0,0.5),
+                inset 0 0 15px rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            max-width: 420px;
+            width: 100%;
+        }
+
+        h2 {
+            color: #e94560;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.6em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(233,69,96,0.5);
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            color: #a8b2d1;
+            margin-bottom: 6px;
+            font-size: 0.85em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"] {
+    width: 100%;
+    padding: 20px 18px;
+    font-size: 2em;
+    background: #0d1b2a;
+    border: 2px solid #1b2838;
+    border-radius: 15px;
+    color: #e0e0e0;
+    outline: none;
+    transition: all 0.3s ease;
+    text-align: right;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+input[type="text"]:focus {
+    border-color: #e94560;
+    box-shadow: 0 0 15px rgba(233,69,96,0.3);
+    background: #0f1f35;
+}
+
+input[type="text"]::placeholder {
+    color: #5a6a80;
+}
+
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        button {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            font-size: 1.2em;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            background: linear-gradient(135deg, #1b2838, #0f1f35);
+            color: #e0e0e0;
+            border-radius: 18px;
+            border: 2px solid rgba(255,255,255,0.08);
+            box-shadow: 
+                0 8px 15px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+            transform: translateY(0);
+            letter-spacing: 0.5px;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #1f3050, #152238);
+            color: #ffffff;
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 
+                0 12px 20px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            background: linear-gradient(135deg, #0d1b2a, #0a1520);
+            color: #a8b2d1;
+            box-shadow: 
+                0 4px 8px rgba(0,0,0,0.3),
+                inset 0 2px 4px rgba(0,0,0,0.5);
+            transform: translateY(2px);
+            border-color: rgba(255,255,255,0.03);
+        }
+
+        /* Стили для разных типов кнопок */
+        button.operator {
+            background: linear-gradient(135deg, #e94560, #c23152);
+            color: #ffffff;
+            border: 2px solid rgba(233,69,96,0.3);
+            box-shadow: 
+                0 8px 15px rgba(233,69,96,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        button.operator:hover {
+            background: linear-gradient(135deg, #f0506e, #d33a5a);
+            box-shadow: 
+                0 12px 20px rgba(233,69,96,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.15);
+        }
+
+        button.operator:active {
+            background: linear-gradient(135deg, #c23152, #a82842);
+            box-shadow: 
+                0 4px 8px rgba(233,69,96,0.2),
+                inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        button.equals {
+            background: linear-gradient(135deg, #f48c15, #e07b10);
+            color: #ffffff;
+            border: 2px solid rgba(244,140,21,0.3);
+            box-shadow: 
+                0 8px 15px rgba(244,140,21,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        button.equals:hover {
+            background: linear-gradient(135deg, #f89e35, #e88a20);
+            box-shadow: 
+                0 12px 20px rgba(244,140,21,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.15);
+        }
+
+        button.equals:active {
+            background: linear-gradient(135deg, #d07c10, #b86a0e);
+            box-shadow: 
+                0 4px 8px rgba(244,140,21,0.2),
+                inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        button.clear {
+            background: linear-gradient(135deg, #4a4e69, #3a3e54);
+            color: #ffffff;
+            border: 2px solid rgba(154,160,195,0.2);
+        }
+
+        button.memory {
+            background: linear-gradient(135deg, #2a4a5e, #1a3a4e);
+            color: #a0d0f0;
+            border: 2px solid rgba(100,180,220,0.2);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 480px) {
+            .calculator {
+                padding: 20px 15px 15px;
+                border-radius: 20px;
+            }
+            
+            .buttons-grid {
+                gap: 8px;
+            }
+            
+            button {
+                border-radius: 14px;
+                font-size: 1em;
+            }
+            
+            input[type="number"] {
+                padding: 12px 14px;
+                font-size: 1em;
+            }
+        }
+        .button {
+  width: 80px;
+  height: 80px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  background: linear-gradient(272deg, #f48c15, #45a049);
+  color: #04ff00;
+  border-radius: 27px;
+  border: 7px solid #ffe1b8;
+  box-shadow: 10px 15px 10px rgba(205, 73, 50, 0.3);
+  transform: scale(1) translateY(0px);
+}
+
+.button:hover {
+  background: linear-gradient(272deg, #ea820b, #3b963f);
+  color: #04ff00;
+  border-radius: 27px;
+  border: 7px solid #ffe1b8;
+  box-shadow: 10px 17px 15px rgba(205, 73, 50, 0.4);
+  transform: scale(1.05) translateY(-2px);
+}
+
+.button:active {
+  background: linear-gradient(272deg, #e07801, #318c35);
+  color: #04ff00;
+  border-radius: 27px;
+  border: 7px solid #ffe1b8;
+  box-shadow: 10px 13px 5px rgba(205, 73, 50, 0.3);
+  transform: scale(0.98) translateY(2px);
+}
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Калькулятор</h2>
+        
+        <div class="input-group">
+          <input type="text" placeholder="0">
+        </div>
+        
+        <div class="buttons-grid">
+            <!-- Первый ряд -->
+            <button class="clear">C</button>
+            <button class="memory">M</button>
+            <button class="memory">MR</button>
+            <button class="operator">/</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button class="operator">*</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button class="operator">-</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button class="operator">+</button>
+            <button>0</button>
+            <button>,</button>
+            <button class="equals">=</button>
+            <button>.</button>
+        </div>
+    </div>
+    
+    <script>
+        let ccc = '';
+        let pccc = '';
+        let op = '';
+        let mmm = 0;
+        let input = document.getElementsByTagName('input')[0];
+        let buttons = document.getElementsByTagName('button');
+        buttons[0].addEventListener('click', function() {
+            ccc = '';
+            pccc = '';
+            op = '';
+            input.value = '0';
+        });
+        buttons[1].addEventListener('click', function() {
+            if (ccc !== '') {
+                mmm = parseFloat(ccc);
+            }
+        });
+        buttons[2].addEventListener('click', function() {
+            ccc = mmm.toString();
+            input.value = ccc;
+        });
+        buttons[3].addEventListener('click', function() {
+            if (ccc !== '') {
+                pccc = ccc;
+                ccc = '';
+                op = '/';
+                input.value = pccc + ' / ';
+            }
+        });
+        buttons[4].addEventListener('click', function() {
+            ccc += '7';
+            input.value = ccc;
+        });
+        buttons[5].addEventListener('click', function() {
+            ccc += '8';
+            input.value = ccc;
+        });
+        buttons[6].addEventListener('click', function() {
+            ccc += '9';
+            input.value = ccc;
+        });
+        buttons[7].addEventListener('click', function() {
+            if (ccc !== '') {
+                pccc = ccc;
+                ccc = '';
+                op = '*';
+                input.value = pccc + ' * ';
+            }
+        });
+        buttons[8].addEventListener('click', function() {
+            ccc += '4';
+            input.value = ccc;
+        });
+        buttons[9].addEventListener('click', function() {
+            ccc += '5';
+            input.value = ccc;
+        });
+        buttons[10].addEventListener('click', function() {
+            ccc += '6';
+            input.value = ccc;
+        });
+        buttons[11].addEventListener('click', function() {
+            if (ccc !== '') {
+                pccc = ccc;
+                ccc = '';
+                op = '-';
+                input.value = pccc + ' - ';
+            }
+        });
+        buttons[12].addEventListener('click', function() {
+            ccc += '1';
+            input.value = ccc;
+        });
+        buttons[13].addEventListener('click', function() {
+            ccc += '2';
+            input.value = ccc;
+        });
+        buttons[14].addEventListener('click', function() {
+            ccc += '3';
+            input.value = ccc;
+        });
+        buttons[15].addEventListener('click', function() {
+            if (ccc !== '') {
+                pccc = ccc;
+                ccc = '';
+                op = '+';
+                input.value = pccc + ' + ';
+            }
+        });
+        buttons[16].addEventListener('click', function() {
+            ccc += '0';
+            input.value = ccc;
+        });
+        buttons[17].addEventListener('click', function() {
+            if (!ccc.includes('.')) {
+                ccc += '.';
+                input.value = ccc;
+            }
+        });
+        buttons[18].addEventListener('click', function() {
+            if (pccc !== '' && ccc !== '' && op !== '') {
+                let r;
+                let n1 = parseFloat(pccc);
+                let n2 = parseFloat(ccc);
+                
+                switch(op) {
+                    case '+':
+                        r = n1 + n2;
+                        break;
+                    case '-':
+                        r = n1 - n2;
+                        break;
+                    case '*':
+                        r = n1 * n2;
+                        break;
+                    case '/':
+                        if (n2 !== 0) {
+                            r = n1 / n2;
+                        } else {
+                            r = 'Ошибка';
+                        }
+                        break;
+                }                
+                input.value = r;
+                ccc = r.toString();
+                pccc = '';
+                op = '';
+            }
+        });
+        buttons[19].addEventListener('click', function() {
+            if (!ccc.includes('.')) {
+                ccc += '.';
+                input.value = ccc;
+            }
+        });
+    </script>
+</body>
+</html>
