@@ -1,7 +1,3 @@
-нужно в readme.md  оформлении
-Создам полный README.md с бизнес-проектом, техническим заданием, архитектурой и UML-схемами в правильном markdown-оформлении.
-
-markdown
 # 🏎️ PITSTOP MANAGEMENT SYSTEM
 
 ## Автоматизированная система управления автосервисом
@@ -119,7 +115,9 @@ GET    /api/orders?type=online    # Список интернет-заказов
 PATCH  /api/orders/:id/status     # Изменить статус заказа
 GET    /api/products?search=...   # Поиск товаров
 POST   /api/payments              # Оформить платёж
-2.2 Мастера ремонта — 3 куратора
+```
+
+### 2.2 Мастера ремонта — 3 куратора
 Каждый мастер курирует 4 ремонтников. Интерфейс: дашборд + список задач + зарплата.
 
 Функционал:
@@ -131,13 +129,15 @@ POST   /api/payments              # Оформить платёж
 📦 Запрос запчастей	Со склада для задания
 📊 Дашборд	Выполнено / в работе / просрочено
 API-маршруты:
-http
+```http
 POST   /api/tasks                 # Создать задание
 GET    /api/tasks?master_id=...   # Мои задания
 PATCH  /api/tasks/:id/assign      # Назначить ремонтнику
 GET    /api/salary?user_id=...    # Зарплата сотрудников
 POST   /api/warehouse/request     # Запрос запчастей
-2.3 Ремонтники — 12 аккаунтов (3 мастера × 4)
+```
+
+### 2.3 Ремонтники — 12 аккаунтов (3 мастера × 4)
 Упрощённый адаптивный интерфейс на смартфон/планшет. Только приём и выполнение заданий.
 
 Функционал:
@@ -147,11 +147,13 @@ POST   /api/warehouse/request     # Запрос запчастей
 ✔️ Завершение	Статус «Завершено» + фото результата
 💰 Зарплата	Просмотр своей зарплаты и смен
 API-маршруты:
-http
+```http
 GET    /api/tasks/my              # Мои задания
 PATCH  /api/tasks/:id/accept      # Принять задание
 PATCH  /api/tasks/:id/complete    # Завершить задание
-2.4 Мастера мойки — 4 куратора
+```
+
+### 2.4 Мастера мойки — 4 куратора
 Аналогична структуре мастеров ремонта. Каждый мастер управляет 4 мойщиками.
 
 Функционал:
@@ -161,22 +163,26 @@ PATCH  /api/tasks/:id/complete    # Завершить задание
 📊 Дашборд	Загрузка по слотам, статистика за день
 💰 Зарплата	Ведомость своей группы
 API-маршруты:
-http
+```http
 POST   /api/wash-tasks            # Задание на мойку
 GET    /api/wash-tasks?master=... # Задания мастера
 PATCH  /api/wash-tasks/:id/assign # Назначить мойщику
-2.5 Мойщики — 16 аккаунтов (4 мастера × 4)
+```
+
+### 2.5 Мойщики — 16 аккаунтов (4 мастера × 4)
 Функционал:
 Действие	Описание
 📋 Приём задания	Получение задачи на мойку
 🔄 Статусы	В очереди → Выполняется → Завершено
 💰 Зарплата	Просмотр своей зарплаты
 API-маршруты:
-http
+```http
 GET    /api/wash-tasks/my         # Мои задания
 PATCH  /api/wash-tasks/:id/start  # Начать
 PATCH  /api/wash-tasks/:id/done   # Завершить
-2.6 Кладовщики — 2 аккаунта (центральный склад)
+```
+
+### 2.6 Кладовщики — 2 аккаунта (центральный склад)
 Управляют центральным складом. Принимают запросы от мини-складов и магазина.
 
 Функционал:
@@ -188,14 +194,16 @@ PATCH  /api/wash-tasks/:id/done   # Завершить
 📊 Дашборд	Остатки, топ-запросы, история движения
 ✏️ CRUD товаров	Добавление, удаление, корректировка
 API-маршруты:
-http
+```http
 GET    /api/warehouse/requests    # Входящие запросы
 PATCH  /api/warehouse/requests/:id/approve  # Одобрить
 POST   /api/warehouse/products   # Добавить товар
 PATCH  /api/warehouse/products/:id          # Обновить
 DELETE /api/warehouse/products/:id          # Удалить
 GET    /api/warehouse/dashboard  # Аналитика склада
-3. СКЛАДСКАЯ СИСТЕМА И ДАШБОРДЫ
+```
+
+## 3. СКЛАДСКАЯ СИСТЕМА И ДАШБОРДЫ
 3.1 Структура складов
 Склад	Пользователи	Интерфейс	Пополнение
 📦 Центральный склад	2 кладовщика	Полный CRUD + дашборд	Прямой ввод / поставщики
@@ -203,7 +211,7 @@ GET    /api/warehouse/dashboard  # Аналитика склада
 🧽 Мини-склад 2 (мойка)	1 ответственный	Просмотр + запросы	Центральный склад
 🏪 Магазин	Кассиры (3)	Просмотр остатков	Центральный склад
 Схема движения товаров:
-text
+```text
 ┌──────────────────────────────────────────────────────────────────┐
 │                     ЦЕНТРАЛЬНЫЙ СКЛАД                             │
 │                    (2 кладовщика)                                 │
@@ -237,7 +245,9 @@ text
 │  │• Интернет-заказы     ││
 │  └──────────────────────┘│
 └──────────────────────────┘
-3.2 Дашборд мини-склада
+```
+
+### 3.2 Дашборд мини-склада
 Элемент	Описание
 📋 Таблица позиций	Артикул, название, количество, ед. изм., мин. остаток
 🔴🟡🟢 Индикатор	Цветовой уровень остатков (красный/жёлтый/зелёный)
@@ -268,7 +278,7 @@ Redis	7+	Кэш сессий, очереди задач
 Laravel Queues	—	Фоновые задачи, уведомления
 Composer	2+	Менеджер зависимостей
 Структура директорий:
-text
+```text
 laravel-project/
 ├── app/
 │   ├── Http/
@@ -303,7 +313,9 @@ laravel-project/
 ├── config/
 │   └── sanctum.php                             # Настройки JWT
 └── composer.json
-4.2 Аутентификация (PHP)
+```
+
+### 4.2 Аутентификация (PHP)
 Используется Laravel Sanctum. Роли в таблице users.role:
 
 Роль	Значение	Описание
@@ -314,12 +326,14 @@ wash_master	Мастер мойки	Управление бригадой мой
 wash_worker	Мойщик	Выполнение заданий
 warehouse_keeper	Кладовщик	Управление складом
 admin	Администратор	Полный доступ
-http
+```http
 POST   /api/auth/login          # Логин → { token, user }
 POST   /api/auth/logout         # Логаут (инвалидация токена)
 GET    /api/auth/me             # Текущий пользователь + роль
 POST   /api/auth/refresh        # Обновление токена
-4.3 Схема БД PostgreSQL
+```
+
+### 4.3 Схема БД PostgreSQL
 Таблицы:
 Таблица	Ключевые поля	Индексы	Описание
 users	id, name, email, password, role, master_id	email (UNIQUE), role, master_id (FK)	Все пользователи системы
@@ -333,7 +347,7 @@ warehouse_requests	id, from_wh, to_wh, product_id, qty, status, comment	from_wh 
 salary_records	id, user_id, period, amount, hours_worked, rate, calculated_at	user_id (FK), period	Расчёт зарплаты
 payments	id, order_id, method, amount, paid_at	order_id (FK)	Платежи
 SQL-схема (ключевые таблицы):
-sql
+```sql
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -378,7 +392,9 @@ CREATE TABLE tasks (
 CREATE INDEX idx_tasks_master ON tasks(master_id);
 CREATE INDEX idx_tasks_worker ON tasks(worker_id);
 CREATE INDEX idx_tasks_status ON tasks(status);
-4.4 Frontend (React — Стек 1)
+```
+
+### 4.4 Frontend (React — Стек 1)
 Технология	Назначение
 React 18	UI-библиотека
 Vite	Сборщик
@@ -390,7 +406,7 @@ Recharts	Графики дашбордов
 Tailwind CSS	Адаптивная вёрстка
 React Query (TanStack)	Кэширование запросов
 Структура src/:
-text
+```text
 src/
 ├── pages/
 │   ├── Cashier/                  # POS + интернет-заказы
@@ -422,7 +438,9 @@ src/
 ├── store/                        # Zustand сторы
 ├── api/                          # API-клиенты (Axios)
 └── types/                        # TypeScript типы
-5. ТЕХНИЧЕСКИЙ СТЕК 2 — NODE.JS / EXPRESS
+```
+
+## 5. ТЕХНИЧЕСКИЙ СТЕК 2 — NODE.JS / EXPRESS
 5.1 Серверная часть (server.js / Express)
 Технология	Версия	Назначение
 Node.js	20 LTS	Среда выполнения
@@ -436,7 +454,7 @@ cors	2+	CORS-политика
 helmet	7+	Заголовки безопасности
 npm	10+	Менеджер пакетов
 Структура проекта:
-text
+```text
 node-project/
 ├── server/
 │   ├── server.js                 # Точка входа Express
@@ -461,8 +479,10 @@ node-project/
 │       └── dashboard.util.js      # Агрегация данных
 ├── package.json
 └── .env
-5.2 Пример server.js
-javascript
+```
+
+### 5.2 Пример server.js
+```javascript
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -506,8 +526,10 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`🚀 PitStop API запущен на порту ${PORT}`);
 });
-5.3 Middleware авторизации (Node)
-javascript
+```
+
+### 5.3 Middleware авторизации (Node)
+```javascript
 // middleware/auth.middleware.js
 const jwt = require('jsonwebtoken');
 
@@ -540,7 +562,9 @@ const authMiddleware = (req, res, next) => {
 };
 
 module.exports = authMiddleware;
-javascript
+```
+
+```javascript
 // middleware/role.middleware.js
 const roleMiddleware = (...allowedRoles) => {
     return (req, res, next) => {
@@ -565,8 +589,10 @@ module.exports = roleMiddleware;
 
 // Использование:
 // router.post('/api/tasks', authMiddleware, roleMiddleware('repair_master', 'admin'), createTask);
-5.4 Prisma Schema (фрагмент)
-prisma
+```
+
+### 5.4 Prisma Schema (фрагмент)
+```prisma
 // prisma/schema.prisma
 
 generator client {
@@ -670,7 +696,9 @@ model Product {
 
   stocks   WarehouseStock[]
 }
-6. ТЕХНИЧЕСКИЕ ЗАДАНИЯ ПО РАЗРАБОТЧИКАМ
+```
+
+## 6. ТЕХНИЧЕСКИЕ ЗАДАНИЯ ПО РАЗРАБОТЧИКАМ
 👑 Разработчик 1 — Тимлид / Архитектор
 Задачи:
 
@@ -868,20 +896,23 @@ README.md
 
 k6/load-test.js
 
-7. ТРЕБОВАНИЯ К АДАПТИВНОМУ ИНТЕРФЕЙСУ
+## 7. ТРЕБОВАНИЯ К АДАПТИВНОМУ ИНТЕРФЕЙСУ
 Все интерфейсы должны корректно отображаться на устройствах:
 
-Устройство	Ширина экрана	Роли	Особенности
-📱 Смартфон	320–767px	Ремонтник, мойщик	Крупные кнопки касания (min 44px), минимум текста, свайп-жесты
-📋 Планшет	768–1023px	Кассир, кладовщик	Таблицы в 2 колонки, боковая панель (сворачиваемая)
-🖥️ ПК/Ноутбук	1024px+	Мастера, кладовщик, админ	Полный дашборд, графики, многоколоночные макеты
+| Устройство | Ширина экрана | Роли | Особенности |
+|---|---|---|---|
+| 📱 Смартфон | 320–767px | Ремонтник, мойщик | Крупные кнопки касания (min 44px), минимум текста, свайп-жесты |
+| 📋 Планшет | 768–1023px | Кассир, кладовщик | Таблицы в 2 колонки, боковая панель (сворачиваемая) |
+| 🖥️ ПК/Ноутбук | 1024px+ | Мастера, кладовщик, админ | Полный дашборд, графики, многоколоночные макеты |
 Контрольные точки (breakpoints):
-css
+```css
 /* Tailwind CSS */
 sm:  640px   /* Смартфон (landscape) */
 md:  768px   /* Планшет */
 lg:  1024px  /* Ноутбук */
 xl:  1280px  /* Десктоп */
+```
+
 Принципы адаптивности:
 Принцип	Описание
 📐 Mobile First	Базовые стили для мобильных, медиа-запросы для расширения
@@ -889,27 +920,32 @@ xl:  1280px  /* Десктоп */
 📏 Относительные единицы	rem, %, vw/vh вместо фиксированных px
 🖼️ Адаптивные изображения	srcset, sizes, lazy loading
 📋 Адаптивные таблицы	Горизонтальный скролл на мобильных, карточки вместо строк
-8. ДОРОЖНАЯ КАРТА РАЗРАБОТКИ (8 НЕДЕЛЬ)
-Неделя	Backend	Frontend	DevOps / QA	Контрольные точки
-1–2	БД: схема, миграции, seed	Роутинг, Layout, авторизация UI	Docker, CI, seed data	✅ Авторизация работает в обоих стеках
-3–4	API: Auth, Orders, Tasks	Кассир UI, рабочий UI	Unit-тесты Auth	✅ Можно создать заказ и задание
-5–6	API: Warehouse, Salary, Analytics	Мастера UI, склад UI	Интеграционные тесты	✅ Полный цикл: заказ → склад → запрос
-7	Оптимизация запросов, экспорт CSV	Дашборды, графики, фильтры	E2E тесты, нагрузка	✅ Дашборды отображают реальные данные
-8	Финальный review, багфикс	Адаптивность, полировка UI	Деплой, документация	✅ Продукт готов к демонстрации
+## 8. ДОРОЖНАЯ КАРТА РАЗРАБОТКИ (8 НЕДЕЛЬ)
+| Неделя | Backend | Frontend | DevOps / QA | Контрольные точки |
+|---|---|---|---|---|
+| 1–2 | БД: схема, миграции, seed | Роутинг, Layout, авторизация UI | Docker, CI, seed data | ✅ Авторизация работает в обоих стеках |
+| 3–4 | API: Auth, Orders, Tasks | Кассир UI, рабочий UI | Unit-тесты Auth | ✅ Можно создать заказ и задание |
+| 5–6 | API: Warehouse, Salary, Analytics | Мастера UI, склад UI | Интеграционные тесты | ✅ Полный цикл: заказ → склад → запрос |
+| 7 | Оптимизация запросов, экспорт CSV | Дашборды, графики, фильтры | E2E тесты, нагрузка | ✅ Дашборды отображают реальные данные |
+| 8 | Финальный review, багфикс | Адаптивность, полировка UI | Деплой, документация | ✅ Продукт готов к демонстрации |
 Спринт 1–2 (MVP):
-text
+```text
 ✅ Пользователь может залогиниться
 ✅ Кассир может создать заказ
 ✅ Мастер может создать задание
 ✅ Рабочий может принять задание
 ✅ Кладовщик видит остатки
+```
+
 Спринт 5–6 (Полный функционал):
-text
+```text
 ✅ Работают запросы между складами
 ✅ Работает расчёт зарплаты
 ✅ Отображаются дашборды аналитики
 ✅ Все роли имеют свои интерфейсы
-9. СРАВНЕНИЕ ДВУХ СТЕКОВ
+```
+
+## 9. СРАВНЕНИЕ ДВУХ СТЕКОВ
 Критерий	Стек 1: PHP + Laravel	Стек 2: Node.js + Express
 Язык	PHP 8.2	JavaScript / Node.js 20
 Фреймворк	Laravel 11	Express.js 4
@@ -928,9 +964,10 @@ ORM	Eloquent	Prisma
 ✅ Строгая структура проекта (MVC)	✅ Высокая производительность I/O
 ✅ Богатая документация на русском	✅ Лёгкий вход для JS-разработчиков
 ✅ Стабильность и предсказуемость	✅ Гибкость архитектуры
-10. UML-ДИАГРАММЫ
-10.1 Use Case диаграмма
-text
+## 10. UML-ДИАГРАММЫ
+
+### 10.1 Use Case диаграмма
+```text
 ┌──────────────────────────────────────────────────────────────────────────┐
 │                        PITSTOP MANAGEMENT SYSTEM                          │
 │                                                                           │
@@ -978,8 +1015,10 @@ text
 │  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘        │     │
 │  └─────────────────────────────────────────────────────────────────┘     │
 └──────────────────────────────────────────────────────────────────────────┘
-10.2 Диаграмма компонентов
-text
+```
+
+### 10.2 Диаграмма компонентов
+```text
 ┌──────────────────────────────────────────────────────────────────────────┐
 │                        FRONTEND LAYER                                     │
 │                        React 18 + Vite                                    │
@@ -1029,9 +1068,11 @@ text
 │  │  stocks         salary       │  │  • Real-time status          │      │
 │  └──────────────────────────────┘  └──────────────────────────────┘      │
 └──────────────────────────────────────────────────────────────────────────┘
-10.3 Диаграмма последовательности
+```
+
+### 10.3 Диаграмма последовательности
 Создание и выполнение задания (ремонт):
-text
+```text
 Мастер         Frontend         API Gateway        БД           Ремонтник
   │                │                 │              │                │
   │  Создать       │                 │              │                │
@@ -1081,8 +1122,10 @@ text
   │  Задание       │                 │              │               │
   │  выполнено     │  { status:      │              │               │
   │<───────────────│   completed }   │              │               │
-10.4 ER-диаграмма базы данных
-text
+```
+
+### 10.4 ER-диаграмма базы данных
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                           PITSTOP DATABASE SCHEMA                            │
 │                                                                              │
@@ -1154,8 +1197,10 @@ text
 ────►  Связь один-ко-многим (FK)
  PK    Первичный ключ
  FK    Внешний ключ
-10.5 Диаграмма развёртывания
-text
+```
+
+### 10.5 Диаграмма развёртывания
+```text
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                        PRODUCTION DEPLOYMENT                                  │
 │                                                                               │
@@ -1210,8 +1255,10 @@ text
 │  │    redis:       image: redis:7       ports: ["6379:6379"]              │    │
 │  └──────────────────────────────────────────────────────────────────────┘    │
 └──────────────────────────────────────────────────────────────────────────────┘
-11. API-КОНТРАКТ (OpenAPI/Swagger)
-yaml
+```
+
+## 11. API-КОНТРАКТ (OpenAPI/Swagger)
+```yaml
 openapi: 3.0.3
 info:
   title: PitStop Management API
@@ -1453,8 +1500,10 @@ paths:
                 type: array
                 items:
                   type: object
-12. ЛИЦЕНЗИЯ
-text
+```
+
+## 12. ЛИЦЕНЗИЯ
+```text
 MIT License
 
 Copyright (c) 2025 PitStop Dev Team
@@ -1472,17 +1521,21 @@ copies or substantial portions of the Software.
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-📚 ПОЛЕЗНЫЕ ССЫЛКИ
-Ресурс	Ссылка
-Laravel Документация	https://laravel.com/docs/11.x
-Express.js Guide	https://expressjs.com/ru/
-Prisma Docs	https://www.prisma.io/docs
-React Docs	https://react.dev
-Tailwind CSS	https://tailwindcss.com/docs
-PostgreSQL Docs	https://www.postgresql.org/docs/16/
-Redis Docs	https://redis.io/docs/
-Docker Docs	https://docs.docker.com
-OpenAPI Spec	https://swagger.io/specification/
+```
+
+## 📚 ПОЛЕЗНЫЕ ССЫЛКИ
+| Ресурс | Ссылка |
+|---|---|
+| Laravel Документация | https://laravel.com/docs/11.x |
+| Express.js Guide | https://expressjs.com/ru/ |
+| Prisma Docs | https://www.prisma.io/docs |
+| React Docs | https://react.dev |
+| Tailwind CSS | https://tailwindcss.com/docs |
+| PostgreSQL Docs | https://www.postgresql.org/docs/16/ |
+| Redis Docs | https://redis.io/docs/ |
+| Docker Docs | https://docs.docker.com |
+| OpenAPI Spec | https://swagger.io/specification/ |
+
 <div align="center">
 PITSTOP MANAGEMENT SYSTEM
 
