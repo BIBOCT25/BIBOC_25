@@ -957,12 +957,14 @@ xl:  1280px  /* Десктоп */
 ```
 
 Принципы адаптивности:
-Принцип	Описание
-📐 Mobile First	Базовые стили для мобильных, медиа-запросы для расширения
-👆 Touch-friendly	Минимальная область касания 44×44px
-📏 Относительные единицы	rem, %, vw/vh вместо фиксированных px
-🖼️ Адаптивные изображения	srcset, sizes, lazy loading
-📋 Адаптивные таблицы	Горизонтальный скролл на мобильных, карточки вместо строк
+
+| Принцип | Описание |
+|---|---|
+| 📐 Mobile First | Базовые стили для мобильных, медиа-запросы для расширения |
+| 👆 Touch-friendly | Минимальная область касания 44×44px |
+| 📏 Относительные единицы | rem, %, vw/vh вместо фиксированных px |
+| 🖼️ Адаптивные изображения | srcset, sizes, lazy loading |
+| 📋 Адаптивные таблицы | Горизонтальный скролл на мобильных, карточки вместо строк |
 ## 8. ДОРОЖНАЯ КАРТА РАЗРАБОТКИ (8 НЕДЕЛЬ)
 | Неделя | Backend | Frontend | DevOps / QA | Контрольные точки |
 |---|---|---|---|---|
@@ -989,24 +991,29 @@ xl:  1280px  /* Десктоп */
 ```
 
 ## 9. СРАВНЕНИЕ ДВУХ СТЕКОВ
-Критерий	Стек 1: PHP + Laravel	Стек 2: Node.js + Express
-Язык	PHP 8.2	JavaScript / Node.js 20
-Фреймворк	Laravel 11	Express.js 4
-ORM	Eloquent	Prisma
-Авторизация	Laravel Sanctum (JWT)	jsonwebtoken + bcryptjs
-Валидация	Form Requests	express-validator / Joi
-Очереди	Laravel Queue + Redis	Bull + Redis
-Тестирование	PHPUnit	Jest + Supertest
-Логирование	Monolog	Winston / Pino
-Деплой	Apache/Nginx + PHP-FPM	PM2 + Nginx
-Миграции БД	Laravel Migrations	Prisma Migrate
-Пакетный менеджер	Composer	npm
+
+| Критерий | Стек 1: PHP + Laravel | Стек 2: Node.js + Express |
+|---|---|---|
+| Язык | PHP 8.2 | JavaScript / Node.js 20 |
+| Фреймворк | Laravel 11 | Express.js 4 |
+| ORM | Eloquent | Prisma |
+| Авторизация | Laravel Sanctum (JWT) | jsonwebtoken + bcryptjs |
+| Валидация | Form Requests | express-validator / Joi |
+| Очереди | Laravel Queue + Redis | Bull + Redis |
+| Тестирование | PHPUnit | Jest + Supertest |
+| Логирование | Monolog | Winston / Pino |
+| Деплой | Apache/Nginx + PHP-FPM | PM2 + Nginx |
+| Миграции БД | Laravel Migrations | Prisma Migrate |
+| Пакетный менеджер | Composer | npm |
+
 Преимущества каждого стека:
-Стек 1 (PHP/Laravel)	Стек 2 (Node.js/Express)
-✅ Встроенная экосистема (Sanctum, Queues, Validation)	✅ Единый язык (JS) на фронте и бэкенде
-✅ Строгая структура проекта (MVC)	✅ Высокая производительность I/O
-✅ Богатая документация на русском	✅ Лёгкий вход для JS-разработчиков
-✅ Стабильность и предсказуемость	✅ Гибкость архитектуры
+
+| Стек 1 (PHP/Laravel) | Стек 2 (Node.js/Express) |
+|---|---|
+| ✅ Встроенная экосистема (Sanctum, Queues, Validation) | ✅ Единый язык (JS) на фронте и бэкенде |
+| ✅ Строгая структура проекта (MVC) | ✅ Высокая производительность I/O |
+| ✅ Богатая документация на русском | ✅ Лёгкий вход для JS-разработчиков |
+| ✅ Стабильность и предсказуемость | ✅ Гибкость архитектуры |
 ## 10. UML-ДИАГРАММЫ
 
 ### 10.1 Use Case диаграмма
